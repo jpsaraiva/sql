@@ -8,14 +8,13 @@
 --
 -- Version: 2017/02/13
 --
--- Example: @tbs_ocu.sql
+-- Example: @tbs_ocu.sql ([opt:] < tablespace_name >)
 --
 -- Notes: Developed and tested on 11.2.0.4.
 --
 ---------------------------------------------------------------------------------------
 --
 
-set lines 200 pages 4000
 col tablespace_name 	for a30
 col total 				for a6
 col used 				for a6
@@ -25,6 +24,12 @@ col severity			for a10
 col total_m				for 999999,99
 col used_m				for 999999,99
 col free_m				for 999999,99
+
+set pagesize 100 lines 220 pages 1000 heading on feed off null '' ver off
+
+column 1 new_value 1 noprint
+select '' "1" from dual where rownum = 0;
+define param = &1 null
 
 select 
 tablespace_name,
@@ -72,4 +77,8 @@ FROM
 (SELECT tablespace_name ,sum(bytes) total, sum(decode(maxbytes,0,bytes,maxbytes)) max FROM dba_data_files where tablespace_name in (select tablespace_name from dba_tablespaces where contents='PERMANENT' and status='ONLINE') GROUP BY tablespace_name) t,
 (SELECT tablespace_name ,sum(bytes) free FROM dba_free_space GROUP BY tablespace_name) f
 WHERE t.tablespace_name = f.tablespace_name(+) 
-) order by 1 desc;
+) 
+where ('&param' is not null and tablespace_name = '&param') or ('&param' = 'null')
+order by 1 desc;
+
+undefine 1 param
