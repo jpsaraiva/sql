@@ -2,7 +2,7 @@
 --
 -- File name: tbs_ocu.sql
 --
--- Purpose: List tablespace usage, takes in consideration autoextend values. Lists tablespace size in human readable format.
+-- Purpose: List tablespace usage, takes in consideration autoextend values.
 --
 -- Author: jpsaraiva
 --
