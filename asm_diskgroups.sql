@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------------
 --
--- File name: asm_diskgroup.sql
+-- File name: asm_diskgroups.sql
 --
 -- Purpose: List ASM diskgroups
 --
@@ -8,7 +8,7 @@
 --
 -- Version: 2017/02/20
 --
--- Example: @asm_diskgroup.sql
+-- Example: @asm_diskgroups.sql
 --
 -- Notes: Developed and tested on 11.2.0.4.
 --

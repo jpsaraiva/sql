@@ -17,29 +17,28 @@
 
 set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
-col  "BLOCKING USER" 		for a30
-col  "BLOCKING SESSION" 	for a15
-col  "BLOCKING SQL ID" 		for a8
-col  "BLOCKING STATUS" 		for a15
-col  "BLOCKING SQL ID" 		for a15
-col  "LAST ACTIVE"		 	for a15
-col  "BLOCKED USER" 		for a30
-col  "BLOCKED SESSION" 		for a15
-col  "BLOCKED STATUS" 		for a15
-col  "BLOCKED SQL ID" 		for a15
+col  "BLKING USER" 		for a15 word_wrapped
+col  "BLKING SESS" 		for a15
+col  "BLKING SQLID" 	for a15
+col  "BLKING STATUS" 	for a15
+col  "BLKING SQL ID" 	for a15
+col  "LAST ACTIVE"		for a15
+col  "BLKED USER" 		for a15 word_wrapped
+col  "BLKED SQL ID" 	for a15
+
+break on "BLKING USER" on "BLKING SESS" on "BLKING STATUS" on "BLKING SQLID" on "LAST ACTIVE"
 
 SELECT 
     distinct 
-        s1.username || '@' || s1.machine "BLOCKING USER",
-        s1.sid || ',' || s1.serial# || '@' || s1.inst_id "BLOCKING SESSION",
-        s1.status "BLOCKING STATUS", s1.sql_id "BLOCKING SQL ID",
+        s1.username || '@' || s1.machine "BLKING USER",
+        s1.sid || ',' || s1.serial# || '@' || s1.inst_id "BLKING SESS",
+        s1.status "BLKING STATUS", nvl(s1.sql_id,s1.prev_sql_id) "BLKING SQLID",
         lpad(trunc(s1.last_call_et/86400),2,0)||' '||
         lpad(trunc((s1.last_call_et/86400-trunc(s1.last_call_et/86400))*24),2,0)||':'||
         lpad (trunc((s1.last_call_et/3600-trunc(s1.last_call_et/3600))*60),2,0)||':'||
         lpad(trunc(((s1.last_call_et/3600-trunc(s1.last_call_et/3600))*60-trunc((s1.last_call_et/3600-trunc(s1.last_call_et/3600))*60))*60),2,0) "LAST ACTIVE",
-        s2.username || '@' || s2.machine "BLOCKED USER",
-        s2.sid || ',' || s2.serial# || '@' || s2.inst_id "BLOCKED SESSION",
-        s2.status "BLOCKED STATUS", s2.sql_id "BLOCKED SQL ID"
+        s2.username || '@' || s2.machine "BLKED USER",
+        s2.sql_id "BLKED SQLID"
   FROM GV$LOCK l1
      , GV$SESSION s1
      , GV$LOCK l2
@@ -51,5 +50,6 @@ SELECT
    AND l1.block > 0 
    AND l2.request > 0
    AND l1.id1 = l2.id1 
-   AND l1.id2 = l2.id2;
+   AND l1.id2 = l2.id2
+   order by 1,2,3,4;
 
