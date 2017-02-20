@@ -15,6 +15,8 @@
 ---------------------------------------------------------------------------------------
 --
 
+set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
+
 col tablespace_name 	for a30
 col total 				for a6
 col used 				for a6
@@ -25,8 +27,7 @@ col total_m				for 999999,99
 col used_m				for 999999,99
 col free_m				for 999999,99
 
-set pagesize 100 lines 220 pages 1000 heading on feed off null '' ver off
-
+undefine param
 column 1 new_value 1 noprint
 select '' "1" from dual where rownum = 0;
 define param = &1 null

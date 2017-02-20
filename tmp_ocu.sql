@@ -15,7 +15,8 @@
 ---------------------------------------------------------------------------------------
 --
 
-set lines 200 pages 4000
+set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
+
 col tablespace_name 	for a30
 col status 				for a10
 col "TOTAL MB"			for 999999,99

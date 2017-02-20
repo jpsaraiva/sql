@@ -15,7 +15,7 @@
 ---------------------------------------------------------------------------------------
 --
 
-set lines 220 pages 4000 ver off
+set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
 col "INST" for 9
 col sql_id for a13

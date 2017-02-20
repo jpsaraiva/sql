@@ -8,12 +8,15 @@
 --
 -- Version: 2017/02/13
 --
--- Example: @rman_execs.sql ([opt:] < number of days >)
+-- Example: @rman_execs.sql ( < number of days >)
 --
--- Notes: Developed and tested on 11.2.0.4.
+-- Notes: 	Developed and tested on 11.2.0.4.
+--			Shows 10 days by default
 --
 ---------------------------------------------------------------------------------------
 --
+
+set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
 col status                       format a25
 col DURATION                     format a10
@@ -25,8 +28,6 @@ col end_time                     format a20
 col command_id                   format a20
 col output_device_type           format a10
 col res							 format a3
-
-set pagesize 100 lines 220 pages 1000 heading on feed off null '' ver off
 
 column 1 new_value 1 noprint
 select '' "1" from dual where rownum = 0;

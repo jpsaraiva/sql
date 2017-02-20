@@ -1,19 +1,24 @@
 ----------------------------------------------------------------------------------------
 --
--- File name: xplan.sql
+-- File name: sql_text.sql
 --
--- Purpose: QoL script to show plan table after explain
+-- Purpose: Shows the text for a given sql_id
 --
 -- Author: jpsaraiva
 --
 -- Version: 2017/02/13
 --
--- Example: @xplan.sql
+-- Example: @sql_text.sql < sql_id >
 --
--- Notes: Developed and tested on 11.2.0.4.
+-- Notes: 	Developed and tested on 11.2.0.4.
 --
 ---------------------------------------------------------------------------------------
 --
 
 set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
-select * from table(dbms_xplan.display);
+
+column sql_fulltext format a120 word_wrapped
+
+select sql_fulltext 
+  from gv$sqlarea
+ where sql_id='&1';

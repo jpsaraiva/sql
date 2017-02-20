@@ -15,7 +15,7 @@
 ---------------------------------------------------------------------------------------
 --
 
-set pagesize 100 lines 220 pages 1000 heading on feed off null '' ver off
+set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
 col owner 				for a15
 col table_name 			for a30
