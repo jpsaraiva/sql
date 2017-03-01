@@ -19,10 +19,10 @@ set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
 col tablespace_name 	for a30
 col status 				for a10
-col "TOTAL MB"			for 999999,99
-col "USED MB"			for 999999,99
-col "FREE MB"			for 999999,99
-col "CURRENT USERS"		for 999999,99
+col "TOTAL MB"			for 999999.99
+col "USED MB"			for 999999.99
+col "FREE MB"			for 999999.99
+col "CURRENT USERS"		for 999999
 
 select
         t.TABLESPACE_NAME,

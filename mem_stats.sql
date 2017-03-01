@@ -20,8 +20,8 @@ set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 col "INST" for 9
 col sql_id for a13
 col "SCHEMA" for a13
-col "ELAPSED_TIME" for 999999,99
-col "CPU_TIME" for 999999,99
+col "ELAPSED_TIME" for 999999.99
+col "CPU_TIME" for 999999.99
 col "ROWS" for 999999
 
 select 

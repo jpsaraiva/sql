@@ -19,13 +19,14 @@ set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
 col tablespace_name 	for a30
 col total 				for a6
+col allocated			for a6
 col used 				for a6
 col free				for a6
-col "%USED"				for 99,99
+col "%USED"				for 99.99
 col severity			for a10
-col total_m				for 999999,99
-col used_m				for 999999,99
-col free_m				for 999999,99
+col total_m				for 999999
+col used_m				for 999999
+col free_m				for 999999
 
 undefine param
 column 1 new_value 1 noprint
@@ -41,6 +42,13 @@ case
     when total < power(1024,4) then trunc(total/power(1024,3),1) || 'G'
     when total < power(1024,5) then trunc(total/power(1024,4),1) || 'T'
 end "TOTAL",
+case 
+    when allocated < power(1024,1) then trunc(allocated/power(1024,0),1) || 'b'
+    when allocated < power(1024,2) then trunc(allocated/power(1024,1),1) || 'K'
+    when allocated < power(1024,3) then trunc(allocated/power(1024,2),1) || 'M'
+    when allocated < power(1024,4) then trunc(allocated/power(1024,3),1) || 'G'
+    when allocated < power(1024,5) then trunc(allocated/power(1024,4),1) || 'T'
+end "ALLOCATED",
 case 
     when used < power(1024,1) then trunc(used/power(1024,0),1) || 'b'
     when used < power(1024,2) then trunc(used/power(1024,1),1) || 'K'
@@ -65,12 +73,14 @@ when (used*100/total) > warning then 'WARNING'
 else 'NORMAL'
 end "SEVERITY"
 ,trunc(total/power(1024,2),1) "TOTAL_M"
+,trunc(allocated/power(1024,2),1) "TOTAL_M"
 ,trunc(used/power(1024,2),1) "USED_M"
 ,trunc(free/power(1024,2),1) "FREE_M"
 from (
 SELECT DISTINCT 
 t.tablespace_name "TABLESPACE_NAME",
 case when (t.max > t.total) then t.max else t.total end "TOTAL",
+t.total "ALLOCATED",
 t.total-NVL(f.free,0) "USED",
 case when (t.max > t.total) then NVL(f.free,0)+t.max-t.total else NVL(f.free,0) end "FREE",
 power(1024,4) "THRESHOLD", 100*power(1024,3) "LIMITE", 85 "WARNING", 90 "CRITICAL" 
@@ -80,6 +90,6 @@ FROM
 WHERE t.tablespace_name = f.tablespace_name(+) 
 ) 
 where ('&param' is not null and tablespace_name = '&param') or ('&param' = 'null')
-order by 1 desc;
+order by 1;
 
 undefine 1 param

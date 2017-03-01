@@ -19,10 +19,10 @@ set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
 col owner 				for a15
 col table_name 			for a30
-col "Allocated (Mb)" 	for 999999,99
-col "Real (Mb)" 		for 999999,99
-col "Frag (Mb)"			for 999999,99
-col "(%)"				for 99,99
+col "Allocated (Mb)" 	for 999999.99
+col "Real (Mb)" 		for 999999.99
+col "Frag (Mb)"			for 999999.99
+col "(%)"				for 99.99
 col num_rows			for 99999999
 col avg_row_len			for 99999999
 

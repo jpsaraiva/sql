@@ -19,9 +19,9 @@ set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
 col owner 		for a15
 col table_name 	for a30
-col table_size 	for 99999,99
+col table_size 	for 99999.99
 col index_name 	for a30
-col index_size 	for 99999,99
+col index_size 	for 99999.99
 col cmd 		for a100
 
 select t.*,

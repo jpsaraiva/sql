@@ -22,5 +22,5 @@ select
     segment_name,
     segment_type,
     (select file_name from dba_data_files b where b.file_id = a.file_id and b.relative_fno = b.relative_fno ) file_name
-from (select owner, segment_name, segment_type, file_id, relative_fno, block_id, max(block_id) over (partition by file_id, relative_fno) max_block_id from dba_extents where tablespace_name='APPS_TS_TX_DATA') a
+from (select owner, segment_name, segment_type, file_id, relative_fno, block_id, max(block_id) over (partition by file_id, relative_fno) max_block_id from dba_extents where tablespace_name='&1') a
 where block_id = max_block_id;
