@@ -28,7 +28,7 @@ column logon_time format a20
 column "ELAPSED TIME"  format a12
 column sql_id    format a14
 
-select sid||','||serial#||'@'||inst_id||'' sse
+select sid||','||serial#||',@'||inst_id||'' sse
      , username
      , substr(osuser||'@'||machine,1,20) source
      , to_char(logon_time, 'YYYY-MM-DD HH24:MI:SS') logon_time

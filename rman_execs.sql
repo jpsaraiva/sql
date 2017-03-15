@@ -35,7 +35,7 @@ define param = &1 7
 
 SELECT session_key
      , input_type
-     , decode(status,'COMPLETED','OK','COMPLETED WITH WARNINGS','OK','FAILED','NOK','RUNNING','RUN','UNK') res
+     , decode(status,'COMPLETED','OK','COMPLETED WITH WARNINGS','WAR','FAILED','NOK','COMPLETED WITH ERRORS','ERR','RUNNING','RUN','UNK') res
      , TO_CHAR(start_time,'YYYY-MM-DD HH24:MI:SS') start_time
      , TO_CHAR(end_time,'YYYY-MM-DD HH24:MI:SS')   end_time
      , output_bytes_display
