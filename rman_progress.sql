@@ -21,7 +21,7 @@ col sse         	format a15
 col opname      	format a20 word_wrapped
 col target_desc 	format a10 word_wrapped
 col message     	format a30 word_wrapped
-col "PROGRESS(%)" 	format 99.00
+col "PROGRESS(%)" 	format 999.00
 
 SELECT sid||','||serial# sse
      , TO_CHAR(start_time,'YYYY-MM-DD HH24:MI:SS') AS start_time
