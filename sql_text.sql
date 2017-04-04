@@ -16,7 +16,7 @@
 --
 
 set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
-
+set long 4000
 column sql_fulltext format a120 word_wrapped
 
 select sql_fulltext 
