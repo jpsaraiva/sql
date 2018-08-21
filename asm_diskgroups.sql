@@ -27,6 +27,7 @@ col pct_used    	for 999.99 HEAD '(%) Used'
 
 select    dg.group_number
 		, dg.name
+--		, dg.compatibility, dg.database_compatibility 
 		, dg.state
 		, dg.type
 		, dg.total_mb

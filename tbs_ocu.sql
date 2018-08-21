@@ -73,7 +73,7 @@ when (used*100/total) > warning then 'WARNING'
 else 'NORMAL'
 end "SEVERITY"
 ,trunc(total/power(1024,2),1) "TOTAL_M"
-,trunc(allocated/power(1024,2),1) "TOTAL_M"
+,trunc(allocated/power(1024,2),1) "ALLOC_M"
 ,trunc(used/power(1024,2),1) "USED_M"
 ,trunc(free/power(1024,2),1) "FREE_M"
 from (

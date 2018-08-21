@@ -24,12 +24,13 @@ column USERNAME          format a8
 column Size(MB)          format 999,990.00
 
 
-SELECT s.sid||','||s.serial#||'@'||s.inst_id||'' sse
+SELECT distinct s.sid||','||s.serial#||'@'||s.inst_id||'' sse
       , s.username      
       , t.start_time "Start" 
       , t.status "Status"
       , s.sql_id
       , ((t.used_ublk*8192)/1024/1024) "Size(MB)"
+      , e.tablespace_name "Tablespace"
       ,t.used_ublk||' Blocks and '||t.used_urec||' Records' "Rollback Usage"
    from dba_data_files df
       , dba_extents e

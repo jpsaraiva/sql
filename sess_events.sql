@@ -1,18 +1,17 @@
 ----------------------------------------------------------------------------------------
 --
--- File name: activ.sql
+-- File name: sess_events.sql
 --
--- Purpose: Lists active sessions on RAC database
+-- Purpose: Lists events running on the database
 --
 -- Author: jpsaraiva
 --
 -- Version: 2017/02/13
 --
--- Example: @activ.sql
+-- Example: @sess_events.sql
 --
 -- Notes: 	Developed and tested on 11.2.0.4.
 --			RAC enabled
---			This script	excludes slaves from view
 --
 ---------------------------------------------------------------------------------------
 --

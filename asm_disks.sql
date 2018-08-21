@@ -2,13 +2,13 @@
 --
 -- File name: asm_disks.sql
 --
--- Purpose: List ASM disks
+-- Purpose: List all ASM disks
 --
 -- Author: jpsaraiva
 --
 -- Version: 2017/02/20
 --
--- Example: @asm_disks.sql ([opt:] < diskgroup >)
+-- Example: @asm_disks.sql
 --
 -- Notes: Developed and tested on 11.2.0.4.
 --
@@ -17,25 +17,26 @@
 
 set pagesize 100 lines 120 pages 1000 heading on feed off null '' ver off
 
-undefine param
-column 1 new_value 1 noprint
-select '' "1" from dual where rownum = 0;
-define param = &1 null
-
-col path 	format 	a35
-col name 	format 	a20
-col	"SIZE" 	format	999,999,999
-break on "DG NAME"
-
-select    g.name		"DG NAME"
-		, d.path
-        , d.name
-		, d.header_status 
-        , d.os_mb 		"SIZE"
-        from v$asm_diskgroup_stat g, v$asm_disk_stat d
-where d.group_number=g.group_number(+)
-and (('&param' is not null and g.name = '&param') or ('&param' = 'null'))
-order by g.name,d.failgroup,d.path
-;
-
-undefine 1 param
+set pages 4000
+set lines 220
+col path for a30
+col gn for 999
+col dn for 999
+col "DG NAME" format a30
+col "DISK NAME" format a30
+col name for a15
+SELECT
+     group_number gn
+    ,disk_number dn
+    ,name
+    ,os_mb
+    --,compound_index
+    --,incarnation
+    ,mount_status
+    ,header_status
+    ,mode_status
+    ,state
+    ,redundancy
+    ,path
+  FROM v$asm_disk
+order by name;
